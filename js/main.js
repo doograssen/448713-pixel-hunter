@@ -1,6 +1,6 @@
 'use strict';
 
-const STARTSCREEN = 0;
+const START_SCREEN = 0;
 const RIGHT_ARROW = 39;
 const LEFT_ARROW = 37;
 const CONTROLS = `
@@ -30,14 +30,11 @@ const bodyElement = document.querySelector(`body`);
 const toggleControls = (element) => {
   const controlElement = bodyElement.querySelector(`.arrows__wrap`);
   const gameScreen = element.querySelector(`.game`);
-  if (gameScreen) {
-    if (!controlElement) {
-      addControlsElement();
-    }
-  } else {
-    if (controlElement) {
-      removeControlsElement();
-    }
+  if (gameScreen && !controlElement) {
+    addControlsElement();
+  }
+  if (!gameScreen && controlElement) {
+    removeControlsElement();
   }
 };
 
@@ -47,8 +44,8 @@ const toggleControls = (element) => {
 const removeControlsElement = () => {
   const controlElement = bodyElement.querySelector(`.arrows__wrap`);
   controlElement.removeEventListener(`click`, onClickControlsHandler);
-  controlElement.removeEventListener(`click`, onMouseDownControlsHandler);
-  controlElement.removeEventListener(`click`, onMouseUpControlsHandler);
+  controlElement.removeEventListener(`mousedown`, onMouseDownControlsHandler);
+  controlElement.removeEventListener(`mouseup`, onMouseUpControlsHandler);
   bodyElement.removeChild(controlElement);
 };
 
@@ -95,7 +92,8 @@ const onMouseDownControlsHandler = (evt) => {
  * @param {Object} evt
  */
 const onMouseUpControlsHandler = (evt) => {
-  evt.target.removeAttribute(`style`);
+  evt.target.style.borderColor = ``;
+  evt.target.style.color = ``;
 };
 
 /**
@@ -118,7 +116,7 @@ const selectSlide = (element) => {
  *
  * @type {number}
  */
-let current = STARTSCREEN;
+let current = START_SCREEN;
 
 /**
  *
@@ -145,4 +143,4 @@ document.addEventListener(`keydown`, (evt) => {
   }
 });
 
-select(STARTSCREEN);
+select(START_SCREEN);
