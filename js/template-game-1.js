@@ -69,8 +69,8 @@ const gameForm = gameScreenFirstTemplate.querySelector(`.game__content`);
  *
  */
 const validateForm = () => {
-  const answerCheckedArray = gameScreenFirstTemplate.querySelectorAll(`input:checked`);
-  if (answerCheckedArray.length === ANSWER_AMOUNT) {
+  const answersCheckedArray = gameScreenFirstTemplate.querySelectorAll(`input:checked`);
+  if (answersCheckedArray.length === ANSWER_AMOUNT) {
     changeGameScreen(gameScreenSecondTemplate);
   }
 };
