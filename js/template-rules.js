@@ -1,5 +1,6 @@
 import {getElementFromTemplate, changeGameScreen} from '../js/utils.js';
-import {gameScreenFirstTemplate} from "../js/template-game-1";
+import {gameScreenFirstTemplate} from '../js/template-game-1.js';
+import {greetingTemplate} from '../js/template-greeting.js';
 
 const template = `<header class="header">
     <button class="back">
@@ -29,7 +30,7 @@ const template = `<header class="header">
     </form>
   </section>`;
 
-export const rulesTemplate = getElementFromTemplate(template);
+const rulesTemplate = getElementFromTemplate(template);
 
 const startGame = rulesTemplate.querySelector(`.rules__button`);
 
@@ -48,11 +49,11 @@ startGame.addEventListener(`click`, () => {
   changeGameScreen(gameScreenFirstTemplate);
 });
 
-export const returnToStartHandler = (element) => {
-  const backButton = element.querySelector(`.back`);
-  if (backButton) {
-    backButton.addEventListener(`click`, () => {
-      changeGameScreen(rulesTemplate);
-    });
-  }
-};
+const backButton = rulesTemplate.querySelector(`.back`);
+if (backButton) {
+  backButton.addEventListener(`click`, () => {
+    changeGameScreen(greetingTemplate);
+  });
+}
+
+export {rulesTemplate};

@@ -22,10 +22,12 @@ const template = `<section class="greeting central--blur">
     </button>
   </section>`;
 
-export const greetingTemplate = getElementFromTemplate(template);
+const greetingTemplate = getElementFromTemplate(template);
 
 const nextScreenButton = greetingTemplate.querySelector(`.greeting__continue`);
 
 nextScreenButton.addEventListener(`click`, () => {
   changeGameScreen(rulesTemplate);
 });
+
+export {greetingTemplate};

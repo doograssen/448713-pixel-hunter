@@ -1,5 +1,5 @@
-import {getElementFromTemplate} from '../js/utils.js';
-import {returnToStartHandler} from "../js/template-rules.js";
+import {getElementFromTemplate, changeGameScreen} from '../js/utils.js';
+import {greetingTemplate} from '../js/template-greeting.js';
 
 const template = `<header class="header">
     <button class="back">
@@ -113,6 +113,13 @@ const template = `<header class="header">
     </table>
   </section>`;
 
-export const statsTemplate = getElementFromTemplate(template);
+const statsTemplate = getElementFromTemplate(template);
 
-returnToStartHandler(statsTemplate);
+const backButton = statsTemplate.querySelector(`.back`);
+if (backButton) {
+  backButton.addEventListener(`click`, () => {
+    changeGameScreen(greetingTemplate);
+  });
+}
+
+export {statsTemplate};

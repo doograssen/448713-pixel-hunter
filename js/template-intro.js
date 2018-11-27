@@ -6,10 +6,12 @@ const template = `<section class="intro">
      <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
      </section>`;
 
-export const introTemplete = getElementFromTemplate(template);
+const introTemplete = getElementFromTemplate(template);
 
 const startButton = introTemplete.querySelector(`.intro__asterisk`);
 
 startButton.addEventListener(`click`, () => {
   changeGameScreen(greetingTemplate);
 });
+
+export {introTemplete};
