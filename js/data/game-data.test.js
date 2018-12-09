@@ -1,9 +1,22 @@
 import {assert} from 'chai';
+import {scoreCount} from "../score-count";
 
-describe(`Array`, () => {
-  describe(`#indexOf()`, () => {
-    it(`should return -1 when the value is not present`, () => {
-      assert.equal(-1, [1, 2, 3].indexOf(4));
+const scoresArray = [{answer: true, time: 29.9}, {answer: true, time: 29.9}, {answer: true, time: 29.9},
+  {answer: true, time: 29.9}, {answer: true, time: 29.9}, {answer: true, time: 29.9},
+  {answer: true, time: 29.9}, {answer: true, time: 29.9}, {answer: true, time: 29.9},
+  {answer: true, time: 29.9}];
+
+
+describe(`Score count validate`, () => {
+  describe(`#scoreCount`, () => {
+    it(`should return scores`, () => {
+      assert(scoreCount(scoresArray));
+    });
+
+    it(`corner cases`, () => {
+      assert(!scoreCount(``));
+      assert(!scoreCount(null));
+      assert(!scoreCount(undefined));
     });
   });
 });
