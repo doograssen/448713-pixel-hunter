@@ -1,17 +1,10 @@
+import {RULES} from "../js/ini-data.js";
+
 const PROP_1 = `answer`;
 const PROP_2 = `time`;
 const PROPS_ARRAY = [PROP_1, PROP_2];
-const RIGHT_ANSWER_RATING = 100;
-const FAST_ANSWER_RATING = 50;
-const FAST_ANSWER_BORDER = 10;
-const SLOW_ANSWER_BORDER = 20;
-const SLOW_ANSWER_RATING = -50;
-const TIME_BOTTOM_BORDER = 0;
-const TIME_TOP_BORDER = 30;
-const LIVE_RATING = 50;
-const ANSWER_AMOUNT = 10;
+
 const GAME_LOSE = -1;
-const LIVE_AMOUNT = 3;
 
 /**
  *
@@ -22,10 +15,10 @@ const scoreCount = (array) => {
   if (!Array.isArray(array)) {
     throw new Error(`Answers data should be array`);
   }
-  if ((!array.length > 3) && (!array.length <= ANSWER_AMOUNT)) {
-    throw new Error(`Answers data should contain amount of elements between 4 and 10. returns - ` + array.length);
+  if (array.length > RULES.answerAmount) {
+    throw new Error(`Answers data should contain amount of elements no more than 10`);
   }
-  if (!(array.length <= ANSWER_AMOUNT)) {
+  if (!array.length) {
     return GAME_LOSE;
   }
 
@@ -46,7 +39,7 @@ const scoreCount = (array) => {
         if (isNaN(element[item])) {
           throw new Error(`Something wrong with ${PROP_2}, NaN detected`);
         }
-        if ((element[item] < TIME_BOTTOM_BORDER) || (element[item] > TIME_TOP_BORDER)) {
+        if ((element[item] < RULES.timeBottomBorder) || (element[item] > RULES.timeTopBorder)) {
           throw new Error(`Something wrong with ${PROP_2}, out of bound exception`);
         }
       }
@@ -54,19 +47,20 @@ const scoreCount = (array) => {
 
     if (element.answer) {
       rightAnswerAmount += 1;
-      scores += RIGHT_ANSWER_RATING;
+      scores += RULES.rightAnswerRating;
 
-      if (element.time <= FAST_ANSWER_BORDER) {
-        scores += FAST_ANSWER_RATING;
-      } else if (element.time > SLOW_ANSWER_BORDER) {
-        scores += SLOW_ANSWER_RATING;
+      if (element.time <= RULES.fastAnswerBorder) {
+        scores += RULES.fastAnswerRating;
+      } else if (element.time > RULES.slowAnswerBorder) {
+        scores += RULES.slowAnswerRating;
       }
     }
   });
+  // console.log(scores);
 
-  let amountAnswerDifference = ANSWER_AMOUNT - rightAnswerAmount;
+  const amountAnswerDifference = RULES.answerAmount - rightAnswerAmount;
 
-  return (amountAnswerDifference > LIVE_AMOUNT) ? GAME_LOSE : scores + (LIVE_AMOUNT - amountAnswerDifference) * LIVE_RATING;
+  return (amountAnswerDifference > RULES.liveAmount) ? GAME_LOSE : scores + (RULES.liveAmount - amountAnswerDifference) * RULES.liveRating;
 };
 
 export {scoreCount};
