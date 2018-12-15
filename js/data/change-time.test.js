@@ -35,7 +35,7 @@ describe(`#changeTime`, () => {
     assert.throws(() => changeTime(SAMPLE_GAME, 2).level, /Time should changes on another value/);
   });
 
-  it(`Time shouldn't be more than Time amount`, () => {
+  it(`Time shouldn't be more than time limit`, () => {
     assert.throws(() => changeTime(CURRENT_STATE, 30.1).time, /Time shouldn't be more than time limit/);
   });
 

@@ -8,7 +8,7 @@ export const changeTime = (game, time) => {
   } else if (isNaN(time)) {
     throw new Error(`Time shouldn't be NaN value`);
   } else if ((game.time !== 0) && (game.time === time)) {
-    throw new Error(`Time should changes on another vgitalue`);
+    throw new Error(`Time should changes on another value`);
   }
   const copyGame = Object.assign({}, game, {
     time
